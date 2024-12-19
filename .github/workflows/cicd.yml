@@ -1,0 +1,30 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  pages: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4.2.2
+      - name: upload pages artifact
+        uses:  actions/upload-pages-artifact@v3.0.1
+        with:
+          path: html/
+      - name: deploy pages artifact
+        id: deploy-pages-artifact
+        uses: actions/deploy-pages@v4.0.5
+      - name: show deployed url
+        run: |
+          echo "Show deployed url"
+          echo "Deployed pages to ${{ steps.deploy-pages-artifact.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
