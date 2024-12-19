@@ -20,7 +20,7 @@ jobs:
       - name: upload pages artifact
         uses:  actions/upload-pages-artifact@v3.0.1
         with:
-          path: 
+          path: /html
       - name: deploy pages artifact
         id: deploy-pages-artifact
         uses: actions/deploy-pages@v4.0.5
